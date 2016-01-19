@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 sub menu_import {
+  # menu_import(filename of CSV menu)
   # from http://stackoverflow.com/a/3065232
   # and http://stackoverflow.com/a/14407167
   my $menu_filename=$_[0];
