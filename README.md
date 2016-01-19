@@ -14,3 +14,5 @@ Menu Item Properties:
 - Number of people it can feed
 - Popularity/Rating
 - Tags ("food type")
+
+## Methods
