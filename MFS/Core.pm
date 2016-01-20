@@ -34,8 +34,11 @@ sub tag_filter { #Filter items by tags.
   return 0;
 }
 
-sub food_optimisation { # Maxine's heart
-  my $menu = $_[0];
+sub choose_food { # Maxine's heart
+  # Parameters: %menu, @event
+  my %menu = $_[0];
+  my @event = $_[1];
+  
 }
 
 1;
