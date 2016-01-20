@@ -11,7 +11,7 @@ sub pop_score {
   if ($n == 0){
         return 0;
   }
-  my $z = 1.281;
+  my $z = 1.281; # 80% confidence interval - from reddit
   my $phat = 1.0*$upvotes/$n;
   my $score = ($phat + $z * $z / (2 * $n) - $z * sqrt(($phat * (1 - $phat) + $z * $z / (4 * $n)) / $n)) / (1 + $z * $z / $n);
   return $score;
@@ -34,11 +34,23 @@ sub tag_filter { #Filter items by tags.
   return 0;
 }
 
+sub random_food {
+  my @menu=$_[0];
+  my $budget=$_[1];
+  my $menu_size=@menu;
+  my $item_choice_num=int(rand($menu_size-1));
+  my %item_choice=$menu[$item_choice_num];
+  my $max_item=int($budget/$item_choice{cost});
+  my $item_quantity=int(rand($max_item)+1);
+  my @food=(%item_choice, $item_quantity);
+  return @food;
+}
+
 sub choose_food { # Maxine's heart
-  # Parameters: %menu, @event
-  my %menu = $_[0];
-  my @event = $_[1];
-  
+  # Parameters: @menu, %event,
+  my @menu = $_[0];
+  my %event = $_[1];
+
 }
 
 1;
