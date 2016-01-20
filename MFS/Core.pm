@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 sub pop_score {
-  # use as pop_score(upvotes, downvotes)
+  # use as pop_score(int $upvotes, int $downvotes)
   # from http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
   my $upvotes=$_[0];
   my $downvotes=$_[1];
@@ -17,7 +17,24 @@ sub pop_score {
   return $score;
 }
 
-sub food_optimisation{ # Maxine's heart
+sub tag_filter { #Filter items by tags.
+  # Use as tag_filter(%object, @tags)
+  # Returns true if object has one or more tags, else returns false
+  my @obj_tags = @{$_[0]{tags}};
+  my @fil_tags = $_[1];
+  for my $tag1 (@obj_tags){
+    $tag1 =~ s/^\s+|\s+$//g;
+    for my $tag2 (@fil_tags){
+      $tag2 =~ s/^\s+|\s+$//g;
+      if ($tag1 eq $tag2){
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
+sub food_optimisation { # Maxine's heart
   my $menu = $_[0];
 }
 

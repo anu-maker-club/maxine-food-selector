@@ -11,16 +11,17 @@ sub menu_import {
   open(my $menu_fh, '<', $menu_filename) or die "Can't read file '$menu_filename' [$!]\n";
   my $menu_header = <$menu_fh>; # eliminate first line
   while (my $line = <$menu_fh>) {
-      chomp($line); # remove whitespace
       my %menu_entry;
       my ($name,$cost,$satiation,$tags,$upvotes,$downvotes) = (split(',', $line));
-      $menu_entry{name}=chomp($name);
+      $name =~ s/^\s+|\s+$//g; # from http://perlmaven.com/trim
+      $menu_entry{name}=$name;
       $menu_entry{cost}=$cost;
       $menu_entry{satiation}=$satiation;
-      $menu_entry{tags}=split('#', $tags);
+      my @tags=(split('#', $tags));
+      @{$menu_entry{tags}}=@tags;
       $menu_entry{upvotes}=$upvotes;
       $menu_entry{downvotes}=$downvotes;
-      push @menu, \%menu_entry;
+      push @menu, {%menu_entry};
   }
   return @menu;
 }
