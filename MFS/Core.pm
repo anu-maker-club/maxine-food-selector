@@ -1,6 +1,7 @@
 package MFS::Core;
 use strict;
 use warnings;
+use Data::Dumper;
 
 sub pop_score {
   # use as pop_score(int $upvotes, int $downvotes)
@@ -22,6 +23,7 @@ sub tag_filter { #Filter items by tags.
   # Returns true if object has one or more tags, else returns false
   my @obj_tags = @{$_[0]{tags}};
   my @fil_tags = $_[1];
+  print Dumper \@_;
   for my $tag1 (@obj_tags){
     $tag1 =~ s/^\s+|\s+$//g;
     for my $tag2 (@fil_tags){
@@ -35,14 +37,17 @@ sub tag_filter { #Filter items by tags.
 }
 
 sub random_food {
-  my @menu=$_[0];
-  my $budget=$_[1];
-  my $menu_size=@menu;
-  my $item_choice_num=int(rand($menu_size-1));
-  my %item_choice=$menu[$item_choice_num];
-  my $max_item=int($budget/$item_choice{cost});
+  # Parameters: @menu, $budget
+  my $data=[@_];
+  my $budget=pop $data;
+  my @menu=$data;
+  my $menu_size=scalar @menu;
+  my $item_choice_num=scalar int(rand($menu_size)+0.5); # +0.5 is hax. Replace with actual round function sometime
+  my @item_choice=$menu[0][$item_choice_num];
+  my $cost=$item_choice[0]{cost};
+  my $max_item=int($budget/$cost);
   my $item_quantity=int(rand($max_item)+1);
-  my @food=(%item_choice, $item_quantity);
+  my @food=(@item_choice, $item_quantity);
   return @food;
 }
 

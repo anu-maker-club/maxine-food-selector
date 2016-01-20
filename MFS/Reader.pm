@@ -6,6 +6,7 @@ sub menu_import {
   # menu_import(filename of CSV menu)
   # from http://stackoverflow.com/a/3065232
   # and http://stackoverflow.com/a/14407167
+  # Standard menu entry: $name, $cost, $satiation, @tags, $upvotes, $downvotes
   my $menu_filename=$_[0];
   my @menu;
   open(my $menu_fh, '<', $menu_filename) or die "Can't read file '$menu_filename' [$!]\n";
