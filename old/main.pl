@@ -35,4 +35,5 @@ if ($debug) {
   print Dumper \$$event{budget};
   my @test_food=MFS::Core::random_food(@menu_out, $$event{budget});
   print Dumper \@test_food;
+  print "Testing new_food_set\n";
 }
